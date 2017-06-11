@@ -1,0 +1,18 @@
+{
+  "name": "fake-patient-web",
+  "version": "1.0.0",
+  "description": "FakePatientWeb shows a realistic fake patient record in a nice UI as well as in JSON form. 300,000 NAMCS records are used as the data source.",
+  "main": "server.js",
+  "scripts": {
+    "test": ""
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "chance": "1.0.9",
+    "express": "4.15.3",
+    "express-handlebars": "^3.0.0",
+    "lodash": "4.17.4",
+    "sqlite3": "3.1.8"
+  }
+}

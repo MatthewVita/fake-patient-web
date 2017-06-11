@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fake Patient Web</title>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="Fake Patient Data, NAMCS" />
+    <meta name="description" content="Fake Patient Data from NAMCS" />
+    <meta name="author" content="Matthew Vita" />
+    <meta http-equiv="cleartype" content="on" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link href='http://fonts.googleapis.com/css?family=Vollkorn|Open+Sans:400,700' rel='stylesheet' type='text/css'/>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100,700,900,500' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="/" class="brand-logo">&nbsp;Fake Patient Web</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a nohref onclick="alert('search not yet available')"><i class="material-icons">search</i></a></li>
+          <li><a href="/"><i class="material-icons">refresh</i></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="row">
+      <div class="col s10">
+        <h1>{{data.lastname}}, {{data.firstname}}</h2>
+      </div>
+      <div class="col s2">
+        <div class="card-panel white">
+          <h5><strong>Patient ID:</strong> {{data.patientid}}<h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s6">
+        <div class="card">
+          <div class="card-content">
+            <h3>Demographics</h3>
+          </div>
+          <div class="card-tabs">
+            <ul class="tabs tabs-fixed-width">
+              <li class="tab"><a href="#primary" class="active">Primary</a></li>
+              <li class="tab"><a class="" href="#secondary">Secondary</a></li>
+
+              <div class="indicator" style="right: 279px; left: 0px;"></div>
+            </ul>
+          </div>
+          <div class="card-content grey lighten-4">
+            <div id="primary" style="display: block;" class="active">
+              <ul>
+                <li><strong>Age:</strong> {{data.age}}</li>
+                <li><strong>Sex:</strong> {{data.sex}}</li>
+                <li><strong>Race:</strong> {{data.race}}</li>
+                <li><strong>Location:</strong> {{data.state}}</li>
+              </ul>
+            </div>
+            <div id="secondary" class="" style="display: none;">
+              <ul>
+                <li><strong>Age Category:</strong> {{data.agecat}}</li>
+                <li><strong>Ethnicity:</strong> {{data.ethnicity}}</li>
+                <li><strong>Deceased:</strong> No</li>
+              </ul>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="col s6">
+        <div class="card">
+          <div class="card-content">
+            <h3>{{data.encounter.0.dos}} Encounter</h3>
+          </div>
+          <div class="card-tabs">
+            <ul class="tabs tabs-fixed-width">
+              <li class="tab"><a href="#summary" class="active">Summary</a></li>
+              <li class="tab"><a class="" href="#measurements">Measurements</a></li>
+
+              <div class="indicator" style="right: 279px; left: 0px;"></div>
+            </ul>
+          </div>
+          <div class="card-content grey lighten-4">
+            <div id="summary" style="display: block;" class="active">
+              <ul>
+                <li><strong>Payertype:</strong> {{data.encounter.0.payertype}}</li>
+                <li><strong>Reason for Visit:</strong> {{data.encounter.0.reasonforvisit}}</li>
+                <li><strong>Time with Provider:</strong> {{data.encounter.0.timewithprovider}}</li>
+                <li><strong>Provider Speciality:</strong> {{data.encounter.0.providerspecialty}}</li>
+              </ul>
+            </div>
+            <div id="measurements" class="" style="display: none;">
+              <ul>
+                {{#each data.measure}}
+                  <li><strong>Measurement:</strong> {{measurement}}: {{measurementvalue}}</li>
+                {{/each}}
+              </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s6">
+        <div class="card">
+          <div class="card-content">
+            <h3>Diagnoses & Labs</h3>
+          </div>
+          <div class="card-tabs">
+            <ul class="tabs tabs-fixed-width">
+              <li class="tab"><a href="#diagnoses" class="active">Codes</a></li>
+              <li class="tab"><a class="" href="#labs">Procedures</a></li>
+
+              <div class="indicator" style="right: 279px; left: 0px;"></div>
+            </ul>
+          </div>
+          <div class="card-content grey lighten-4">
+            <div id="diagnoses" style="display: block;" class="active">
+              <ul>
+                {{#each data.diagnosis}}
+                  <li><strong>ICD9:</strong> {{icd9}}</li>
+                {{/each}}
+              </ul>
+            </div>
+            <div id="labs" class="" style="display: none;">
+              <ul>
+                {{#each data.labresult}}
+                  <li><strong>Lab ID:</strong> {{labresultid}}</li>
+                  <li><strong>LOINC:</strong> {{loinc_num}}</li>
+                  <li><strong>Date:</strong> {{date_result}}</li>
+                  <li><strong>OBS Quan:</strong> {{obs_quan}}</li>
+                  <br />
+                {{/each}}
+              </ul>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="col s6">
+        <div class="card">
+          <div class="card-content">
+            <h3>Prescriptions</h3>
+          </div>
+          <div class="card-tabs">
+            <ul class="tabs tabs-fixed-width">
+              <li class="tab"><a href="#overview" class="active">Overview</a></li>
+
+              <div class="indicator" style="right: 279px; left: 0px;"></div>
+            </ul>
+          </div>
+          <div class="card-content grey lighten-4">
+            <div id="overview" style="display: block;" class="active">
+              {{#each data.prescription}}
+                <li><strong>Drug ID:</strong> {{drugid}}</li>
+                <li><strong>Prescription:</strong> {{prescriptionid}}</li>
+                <br />
+              {{/each}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <h3>&nbsp;JSON</h3>
+      <div class="col s12">
+        <textarea style="height: 150px;">{{raw}}</textarea>
+      </div>
+    </div>
+    <script>
+      // Cheap browser check
+      if (!window.btoa) { window.location = 'http://www.old-browser.org/en-us/' };
+    </script>
+  </body>
+</html>
+
+
