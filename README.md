@@ -16,6 +16,7 @@ FakePatientWeb shows a realistic fake patient record in a nice UI as well as in 
 
 ## TODOs
 
+- Expose a GET endpoint for the JSON. `FakePatientDataAsAService`!
 - Support multiple encounters
 - See if NAMCS has encounter notes and/or forms
 - Enable search
